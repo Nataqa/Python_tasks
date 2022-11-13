@@ -28,7 +28,7 @@ def delete_elem (text, lenght):
 # Функция определения самого длинного английского элемента
 def max_angl_word (text):
     # выбираем из общего списка все английские слова
-    alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
     myFile_list_angl = []
     for item in myFile_list:
         for char in item:
@@ -54,10 +54,12 @@ def max_count (text):
     word = {}
     max_w = {}
     for item in myFile_list:
-        dd = myFile_list.count(item)
-        dd = {item: dd}
-        word.update(dd)
-    # print(word)
+        if item in word:
+            count = word.get(item)
+            word.update({item: count + 1})
+        else:
+            word.update({item: 1})
+
     # преобразуем словарь в список отображение
     key_word = word.items()
     # преобразуем отображение в список кортежей (ключ, значение)
@@ -70,6 +72,7 @@ def max_count (text):
         if item[1] == max_count_word[1]:
             ff = {item}
             max_w.update(ff)
+
     return max_w
 
 
@@ -78,9 +81,10 @@ myFile_str = redact_File(myFile_str)
 # print(myFile_str)
 # преобразуем отредактированную строку в список
 myFile_list = myFile_str.split()
-#убираем маркер начала (пробелы)
-myFile_list = [elem.strip().replace('\ufeff', '') for elem in myFile_list]
 # print(myFile_list)
+# #убираем маркер начала (пробелы)
+# myFile_list = [elem.strip().replace('\ufeff', '') for elem in myFile_list]
+# # print(myFile_list)
 
 # вызываем функцию удаления элементов, меньших определенной длины
 myFile_list = delete_elem(myFile_list, 3)
@@ -92,6 +96,7 @@ max_angl = max_angl_word(myFile_list)
 
 # вызываем функцию определения слова с максимальным повторением
 max_word = max_count(myFile_list)
+# print(max_word)
 
 print(f'Список самых частых слов длинной более трёх символов: {max_word}')
 print(f'Список самых длинных английских слов: {max_angl}')
