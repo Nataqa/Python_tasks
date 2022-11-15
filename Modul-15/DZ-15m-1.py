@@ -3,6 +3,7 @@
 # часто встречающееся из тех, что имеют размер более трех символов, и
 # наиболее длинное слово на английском языке.
 
+import re
 #читаем файл в переменную my_File, преобразовываем в строку
 with open("filename1.txt", encoding="utf-8") as myFile:
     myFile_str = myFile.read()
@@ -13,8 +14,6 @@ def redact_File (text):
     text = text.replace("\n", "")  # убираем перехода на новую строку
     for i in '!"\'#$%&()*+-—,./:;<=>?@[\\]^_{|}~':
         text = text.replace(i, ' ')
-    text = text.replace("   ", " ")  # заменяем 3 пробела одним
-    text = text.replace("  ", " ")  # убираем 2 пробела одним
     return text
 
 # Функция удаления элементов по длине
@@ -80,9 +79,9 @@ def max_count (text):
 myFile_str = redact_File(myFile_str)
 # print(myFile_str)
 # преобразуем отредактированную строку в список
-myFile_list = myFile_str.split()
+myFile_list = re.split(r'\s+', myFile_str)
 # print(myFile_list)
-# #убираем маркер начала (пробелы)
+# #убираем маркер начала, если вдруг они есть (пробелы), но при верной кодировке можно и не делать
 # myFile_list = [elem.strip().replace('\ufeff', '') for elem in myFile_list]
 # # print(myFile_list)
 
