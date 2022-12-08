@@ -1,7 +1,7 @@
 # импортируем необходимые библиотеки, классы, переменные и т.д.
 import telebot
 from starter import keys, TOKEN
-from verification import ConvertionException, CryptoConverter
+from extensions import ConvertionException, CryptoConverter
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -29,7 +29,7 @@ def convert(message: telebot.types.Message):
         if len(input_data) != 3:
             raise ConvertionException("Неверное количество параметров.")
         quote, base, amount = input_data
-        response = CryptoConverter.convert(quote, base, amount)
+        response = CryptoConverter.get_price(quote, base, amount)
     except ConvertionException as e:
         bot.reply_to(message, f"Ошибка ввода.\n{e}")
     except Exception as e:

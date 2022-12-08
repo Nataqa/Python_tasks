@@ -8,7 +8,7 @@ class ConvertionException(Exception):
 # класс для отлавливания ошибок пользователя и конвертации валют
 class CryptoConverter:
     @staticmethod
-    def convert(quote: str, base: str, amount: str):
+    def get_price(quote: str, base: str, amount: str):
         if quote == base:
             raise ConvertionException("Невозможно перевести в ту же самую валюту.")
         try:
