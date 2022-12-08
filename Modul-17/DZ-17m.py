@@ -43,19 +43,19 @@ def BinSearch(my_str, elem, my_len):
 flag = True
 while flag:
     try:
-        str_input = list(map(int, input("Введите целые числа через пробел:").split()))
+        str_input = list(map(float, input("Введите числа через пробел:").split()))
         flag = False
     except:
-        print('Ошибка.Введенные данные не являются целым числом!!!\n')
+        print('Ошибка.Введенные данные не являются числом!!!\n')
 
 # Вводим произвольное число с проверкой ввода
 flag = True
 while flag:
     try:
-        number_input = int(input("Введите произвольное целое число: "))
+        number_input = float(input("Введите произвольное число: "))
         flag = False
     except:
-        print('Ошибка.Введенные данные не являются целым числом!!!\n')
+        print('Ошибка.Введенные данные не являются числом!!!\n')
 
 # Определяем длину введенной последовательности
 len_my_str = len(str_input)
